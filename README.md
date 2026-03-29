@@ -48,7 +48,7 @@ Create a `.env` file in the project root:
 
 ```bash
 GEMINI_API_KEY=your_key_here
-WORKING_DIR=./calculator   # directory the agent is allowed to read/write/run (default: ./calculator)
+
 ```
 
 Get a free key at [aistudio.google.com](https://aistudio.google.com/).
@@ -60,11 +60,12 @@ Change `WORKING_DIR` to point the agent at any other project folder on your mach
 Open `config.py` to adjust behaviour:
 
 ```python
-MAX_ITERS = 20     # Max agentic loop iterations before giving up
-MAX_CHARS = 10000  # Max characters read from a file in a single tool call
+MAX_ITERS = 20            # Max agentic loop iterations before giving up
+MAX_CHARS = 10000         # Max characters read from a file in a single tool call
+WORKING_DIR = "./calculator"  # Directory the agent is allowed to read/write/run
 ```
 
-Increase `MAX_ITERS` for complex, multi-step tasks that may need more rounds of reasoning. Decrease it to cap API usage.
+Increase `MAX_ITERS` for complex, multi-step tasks that may need more rounds of reasoning. Decrease it to cap API usage. Change `WORKING_DIR` to point the agent at any other project folder.
 
 ---
 

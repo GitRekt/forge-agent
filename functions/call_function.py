@@ -1,11 +1,10 @@
-import os
-
 from functions.get_files_info import schema_get_files_info, get_files_info
 from functions.get_file_content import schema_get_file_content, get_file_content
 from functions.write_file import schema_write_file, write_file
 from functions.run_python_file import schema_run_python_file, run_python_file
 
 from google.genai import types
+from config import WORKING_DIR
 
 available_functions = types.Tool(
     function_declarations=[
@@ -43,7 +42,7 @@ def call_function(function_call, verbose=False):
         )
     
     args = dict(function_call.args) if function_call.args else {}
-    args["working_directory"] = os.getenv("WORKING_DIR", "./calculator")
+    args["working_directory"] = WORKING_DIR
     function_result = function_map[function_name](**args)
 
     return types.Content(
