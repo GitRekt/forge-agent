@@ -8,7 +8,7 @@ Forge is a command-line AI agent that takes a natural-language task and autonomo
 
 ## Features
 
-- **Agentic loop** — runs up to 20 reasoning iterations, chaining tool calls until it produces a final answer
+- **Agentic loop** — runs up to `MAX_ITERS` reasoning iterations (default: 20), chaining tool calls until it produces a final answer
 - **Tool use** — backed by four built-in tools: list directory contents, read files, write/overwrite files, and execute Python scripts
 - **Google Gemini 2.5 Flash** — fast, capable model with native function-calling support
 - **Verbose mode** — optionally inspect every tool call and its response in real time
@@ -52,6 +52,17 @@ GEMINI_API_KEY=your_key_here
 
 Get a free key at [aistudio.google.com](https://aistudio.google.com/).
 
+### 4. (Optional) Tune configuration
+
+Open `config.py` to adjust behaviour:
+
+```python
+MAX_ITERS = 20     # Max agentic loop iterations before giving up
+MAX_CHARS = 10000  # Max characters read from a file in a single tool call
+```
+
+Increase `MAX_ITERS` for complex, multi-step tasks that may need more rounds of reasoning. Decrease it to cap API usage.
+
 ---
 
 ## Usage
@@ -93,7 +104,7 @@ Tool executor  ──── runs: list_files / read_file / write_file / run_pyth
 Result fed back into conversation
     │
     ▼
-Repeat (up to 20 iterations) until Gemini returns plain text
+Repeat (up to MAX_ITERS iterations) until Gemini returns plain text
     │
     ▼
 Final answer printed to stdout
@@ -109,7 +120,7 @@ Forge uses Gemini's native **function-calling** API. On each iteration, if the m
 forge-agent/
 ├── main.py                  # Entry point & agentic loop
 ├── prompts.py               # System prompt
-├── config.py                # Shared constants
+├── config.py                # Tunable constants (MAX_ITERS, MAX_CHARS)
 ├── functions/
 │   ├── call_function.py     # Tool dispatcher
 │   ├── get_files_info.py    # Tool: list directory

@@ -3,6 +3,7 @@ import os
 from dotenv import load_dotenv
 from google import genai
 from google.genai import types
+from config import MAX_ITERS
 from prompts import system_prompt
 from functions.call_function import available_functions, call_function
 
@@ -27,15 +28,15 @@ def main():
     messages = [types.Content(role="user", parts=[types.Part(text=args.content)])]
     
     # generate_content(args, client, messages)
-    for _ in range(20):
+    for _ in range(MAX_ITERS):
         text = generate_content(args, client, messages)
         if text:
             print("Final response:", text)
-            break
-    else:
-        print("No text response received after 20 iterations.")
-        raise SystemExit(1)
+            return
         
+    print(f"No text response received after {MAX_ITERS} iterations.")
+    exit(1)
+
 
 def generate_content(args, client: genai.Client, messages: list[types.Content]):
     response = client.models.generate_content(
