@@ -48,9 +48,12 @@ Create a `.env` file in the project root:
 
 ```bash
 GEMINI_API_KEY=your_key_here
+WORKING_DIR=./calculator   # directory the agent is allowed to read/write/run (default: ./calculator)
 ```
 
 Get a free key at [aistudio.google.com](https://aistudio.google.com/).
+
+Change `WORKING_DIR` to point the agent at any other project folder on your machine.
 
 ### 4. (Optional) Tune configuration
 

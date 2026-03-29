@@ -1,3 +1,5 @@
+import os
+
 from functions.get_files_info import schema_get_files_info, get_files_info
 from functions.get_file_content import schema_get_file_content, get_file_content
 from functions.write_file import schema_write_file, write_file
@@ -41,7 +43,7 @@ def call_function(function_call, verbose=False):
         )
     
     args = dict(function_call.args) if function_call.args else {}
-    args["working_directory"] = "./calculator"
+    args["working_directory"] = os.getenv("WORKING_DIR", "./calculator")
     function_result = function_map[function_name](**args)
 
     return types.Content(
