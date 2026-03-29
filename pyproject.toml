@@ -1,0 +1,10 @@
+[project]
+name = "forge-agent"
+version = "1.0.0"
+description = "Forge — an autonomous AI coding agent powered by Google Gemini"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "google-genai==1.12.1",
+    "python-dotenv==1.1.0",
+]
